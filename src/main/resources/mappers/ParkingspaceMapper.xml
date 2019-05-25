@@ -35,7 +35,7 @@
       )
     values (#{id,jdbcType=INTEGER}, #{parkingspaceId,jdbcType=INTEGER}, #{parkinglotId,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      #{endTime,jdbcType=TIMESTAMP}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pfhuang.pojo.Parkingspace" >
@@ -138,7 +138,17 @@
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByParkingSpaceIdAndParkinglotId" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from parkingspace
+    where parkingspace_id=#{parkingSpaceId}
+    and parkinglot_id=#{parkinglotId}
+
+  </select>
+
 </mapper>

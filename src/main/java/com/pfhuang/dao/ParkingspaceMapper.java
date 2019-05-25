@@ -1,6 +1,7 @@
 package com.pfhuang.dao;
 
 import com.pfhuang.pojo.Parkingspace;
+import org.apache.ibatis.annotations.Param;
 
 public interface ParkingspaceMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +15,7 @@ public interface ParkingspaceMapper {
     int updateByPrimaryKeySelective(Parkingspace record);
 
     int updateByPrimaryKey(Parkingspace record);
+
+    Parkingspace selectByParkingSpaceIdAndParkinglotId(@Param("parkingSpaceId") Integer parkingSpaceId, @Param("parkinglotId") Integer parkinglotId);
+
 }
